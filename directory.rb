@@ -18,27 +18,47 @@ def input_students
   students
 end
 
-
 def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
 
 def print(students, filter)
-  if filter.empty?
-    students.each_with_index do | student, index |
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
-  else
-    students.each_with_index { |student, index| if student[:name][0].upcase == filter then 
-      puts("#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)") end }
+  if filter[:letter_filter].empty? && filter[:number_filter].empty?
+    students.each_with_index { 
+      |student, index | puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    }
+  elsif !filter[:letter_filter].empty? && filter[:number_filter].empty?
+    students.each_with_index { 
+      |student, index| if student[:name][0].upcase == filter[:letter_filter].upcase then 
+      puts("#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)") 
+    end 
+    }
+  elsif filter[:letter_filter].empty? && !filter[:number_filter].empty?
+    students.each_with_index {
+      |student, index| if student[:name].length <= filter[:number_filter].to_i then 
+        puts("#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)") 
+      end 
+    }
+    elsif !filter[:letter_filter].empty? && !filter[:number_filter].empty?
+    students.each_with_index {
+        |student, index| if (student[:name][0].upcase == filter[:letter_filter].upcase && 
+          student[:name].length <= filter[:number_filter].to_i) then
+          puts("#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)") 
+        end 
+    }
   end 
 end
 
 def student_filter
+  filter = {}
   puts "Please enter first letter of students name that you wish to print"
-  filter = gets.chomp
-  return filter.upcase
+  letter_filter = gets.chomp
+  filter[:letter_filter] = letter_filter
+  puts "Please enter maximum number of characters for a name"
+  number_filter = gets.chomp
+  filter[:number_filter] = number_filter
+  return filter
 end
 
 def print_footer(names)
