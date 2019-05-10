@@ -24,10 +24,21 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
-  students.each_with_index do | student, index |
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
+def print(students, filter)
+  if filter.empty?
+    students.each_with_index do | student, index |
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  else
+    students.each_with_index { |student, index| if student[:name][0].upcase == filter then 
+      puts("#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)") end }
+  end 
+end
+
+def student_filter
+  puts "Please enter first letter of students name that you wish to print"
+  filter = gets.chomp
+  return filter.upcase
 end
 
 def print_footer(names)
@@ -37,5 +48,5 @@ end
 #nothing happens until we call the methods
 students = input_students
 print_header
-print(students)
+print(students, student_filter)
 print_footer(students)
