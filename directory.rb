@@ -9,7 +9,7 @@ def input_students
   while !exit do
     puts "Please enter the student name"
     name = user_input
-    puts "Please enter their cohort"
+    puts "Please enter their cohort month"
     cohort = user_input
     if name.upcase == 'EXIT' || cohort.upcase == 'EXIT'
       exit = true      
@@ -32,22 +32,12 @@ def user_input
   end
 end
 
-def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
-end
-
-def print(students)
-  students.each_with_index { 
-    |student, index | puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  }
-end
-
 def filter_choice
 puts "Please select an option to filter by"
 puts "0. No filter"
 puts "1. Filter by first letter of name"
 puts "2. Filter by number of characters in name"
+puts "3. Filter by cohort"
 puts "9. Exit"
 return gets.chomp
 end
@@ -64,9 +54,31 @@ def student_filter(students, filter_choice)
     puts "Please enter maximum number of characters for a name"
     number_filter = gets.chomp
     return students.select { |student| student[:name].length <= number_filter.to_i}
+  when "3"
+    puts "Please choose from the following cohorts #{group_options(students)}"
+    cohort_filter = gets.chomp
+    return students.select { |student| student[:cohort].to_s.upcase == cohort_filter.upcase}
   when "9"
     exit
   end
+end
+
+def group_options(students)
+options = []
+students.each { |student| options << student[:cohort].to_s}
+return options.uniq
+end
+
+
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
+
+def print(students)
+  students.each_with_index { 
+    |student, index | puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  }
 end
 
 def print_footer(names)
