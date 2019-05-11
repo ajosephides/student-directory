@@ -55,7 +55,7 @@ def student_filter(students, filter_choice)
     number_filter = gets.chomp
     return students.select { |student| student[:name].length <= number_filter.to_i}
   when "3"
-    puts "Please choose from the following cohorts #{group_options(students)}"
+    puts "Please choose from the following cohorts #{group_options(students).join(", ")}"
     cohort_filter = gets.chomp
     return students.select { |student| student[:cohort].to_s.upcase == cohort_filter.upcase}
   when "9"
@@ -65,10 +65,9 @@ end
 
 def group_options(students)
 options = []
-students.each { |student| options << student[:cohort].to_s}
+students.each { |student| options << student[:cohort].to_s.capitalize}
 return options.uniq
 end
-
 
 def print_header
   puts "The students of Villains Academy"
