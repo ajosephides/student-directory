@@ -2,25 +2,26 @@
 def input_students
   exit = false
   puts "Please enter the names of the students"
-  puts "To finish, type 'exit' "
+  puts "To finish hit return twice when entering a name"
   # create an empty array
   students = []
+ return add_students(students, user_input)
   # continue to add names til exit is typed in
-  while !exit do
-    puts "Please enter the student name"
-    name = user_input
-    puts "Please enter their cohort month"
-    cohort = user_input
-    if name.upcase == 'EXIT' || cohort.upcase == 'EXIT'
-      exit = true      
-    else
-    # add the student to the array
-    students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
-  end
-end
+  #while !exit do
+    #puts "Please enter the student name"
+    #name = user_input
+    #puts "Please enter their cohort month"
+    #cohort = user_input
+    #if name.upcase == 'EXIT' || cohort.upcase == 'EXIT'
+      #exit = true      
+    #else
+    ## add the student to the array
+    #students << {name: name, cohort: cohort.to_sym}
+    #puts "Now we have #{students.count} students"
+  #end
+#end
   # return array of students
-  return students
+#  return students
 end
 
 def user_input
@@ -30,6 +31,18 @@ def user_input
   else
     return user_input
   end
+end
+
+def add_students(students, name)
+  while name != "Unknown" do
+    puts "Please enter their cohort months"
+    cohort = user_input
+    students << {name: name, cohort: cohort.to_sym}
+    puts "Now we have #{students.count} students\n"
+    puts "Please enter the next student's name"
+    name = user_input
+  end
+  return students
 end
 
 def filter_choice
