@@ -1,27 +1,34 @@
 
+def interactive_menu
+  students = []
+  loop do
+  puts "1. Input the students"
+  puts "2. Filter the students"
+  puts "3. Show the students"
+  puts "9. Exit"
+  selection = gets.chomp
+  case selection
+  when "1"
+    students = input_students
+  when "2"
+    students = student_filter(students, filter_choice)
+  when "3"
+    print_header
+    print(students)
+    print_footer(students)
+  when "9"
+    exit
+  else
+    puts "Please enter one of the choices again"
+  end
+end
+end
+
 def input_students
-  exit = false
   puts "Please enter the names of the students"
   puts "To finish hit return twice when entering a name"
-  # create an empty array
   students = []
  return add_students(students, user_input)
-  # continue to add names til exit is typed in
-  #while !exit do
-    #puts "Please enter the student name"
-    #name = user_input
-    #puts "Please enter their cohort month"
-    #cohort = user_input
-    #if name.upcase == 'EXIT' || cohort.upcase == 'EXIT'
-      #exit = true      
-    #else
-    ## add the student to the array
-    #students << {name: name, cohort: cohort.to_sym}
-    #puts "Now we have #{students.count} students"
-  #end
-#end
-  # return array of students
-#  return students
 end
 
 def user_input
@@ -98,7 +105,8 @@ def print_footer(names)
 end
 
 #nothing happens until we call the methods
-students = input_students
-print_header
-print(student_filter(students, filter_choice))
-print_footer(students)
+#students = input_students
+#print_header
+#print(student_filter(students, filter_choice))
+#print_footer(students)
+interactive_menu
