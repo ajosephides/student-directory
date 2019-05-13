@@ -46,11 +46,15 @@ def add_students(name)
   while name != "Unknown" do
     puts "Please enter their cohort months"
     cohort = user_input
-    @students << {name: name, cohort: cohort.to_sym}
+    add_student(name, cohort)
     puts "Now we have #{@students.count} students\n"
     puts "Please enter the next student's name"
     name = user_input
   end
+end
+
+def add_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 def filter_choice
