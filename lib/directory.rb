@@ -2,6 +2,7 @@ require_relative './student.rb'
 require_relative './user.rb'
 require_relative './menu.rb'
 require_relative './students.rb'
+require_relative './output.rb'
 
 @user = User.new
 @menu = Menu.new
@@ -21,9 +22,10 @@ def process_choice(selection)
   when "2"
     load_students
   when "3"
-    print_filtered(student_filter(filter_choice))
+    Output.new.print_students(student_filter(filter_choice))
   when "4"
-    show_students
+    #show_students
+    Output.new.show_students(@students.all_students)
   when "5"
     save_students
   when "9"
@@ -68,13 +70,9 @@ def student_filter(filter_choice)
     @students.first_letter_filter(@user.filter_detail)
   when "2"
     puts "Please enter maximum number of characters for a name"
-    #number_filter = @user.filter_detail
-    #return @students.all_students.select { |student| student.name.length <= number_filter.to_i}
     @students.character_filter(@user.filter_detail)
   when "3"
     puts "Please choose from the following cohorts #{group_options.join(", ")}"
-    #cohort_filter = @user.filter_detail
-    #return @students.all_students.select { |student| student.cohort.upcase == cohort_filter.upcase}
     @students.cohort_filter(@user.filter_detail)
   when "9"
     exit
@@ -85,33 +83,6 @@ def group_options
 options = []
 @students.all_students.each { |student| options << student.cohort.to_s.capitalize}
 return options.uniq
-end
-
-def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
-end
-
-def print
-  @students.all_students.each_with_index { 
-    |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
-  }
-end
-
-def print_filtered(filtered_students)
-  filtered_students.each_with_index { 
-    |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
-  }
-end
-
-def print_footer
-  puts "Overall, we have #{@students.all_students.count} great student#{if @students.all_students.count > 1 then "s" end}"
-end
-
-def show_students
-  print_header
-  print
-  print_footer
 end
 
 def save_students
