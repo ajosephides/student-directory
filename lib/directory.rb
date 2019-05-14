@@ -156,6 +156,3 @@ def load_students(filename = "students.csv")
   end
   file.close
 end
-
-try_load_students
-print_menu
