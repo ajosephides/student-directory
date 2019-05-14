@@ -1,5 +1,8 @@
 require_relative './student.rb'
+require_relative './user.rb'
+
 @students = []
+@user = User.new
 
 def print_menu
   loop do
@@ -11,7 +14,7 @@ def print_menu
   puts "5. Save the students"
   puts "9. Exit"
   puts "--------------------------------\n"
-  process_choice(STDIN.gets.chomp)
+  process_choice(@user.menu_selection)
   end
 end
 
@@ -158,3 +161,4 @@ def load_students(filename = "students.csv")
   end
   file.close
 end
+
