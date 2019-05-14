@@ -7,6 +7,8 @@ def initialize(name, cohort)
   @cohort = cohort
 end
 
-
+def add_student(students)
+  students << self
+end
 
 end

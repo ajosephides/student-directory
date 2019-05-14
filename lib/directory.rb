@@ -6,6 +6,8 @@ require_relative './students.rb'
 @user = User.new
 @menu = Menu.new
 @students = Students.new.all_students
+#@students_exp = Students.new.all_students
+
 
 def print_menu
   loop do
@@ -51,7 +53,8 @@ def add_students(name)
 end
 
 def add_student(name, cohort)
-  @students<< Student.new(name, cohort)
+  #@students<< Student.new(name, cohort)
+  Student.new(name, cohort).add_student(@students)
 end
 
 def filter_choice
