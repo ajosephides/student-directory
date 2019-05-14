@@ -1,10 +1,11 @@
 require_relative './student.rb'
 require_relative './user.rb'
 require_relative './menu.rb'
+require_relative './students.rb'
 
-@students = []
 @user = User.new
 @menu = Menu.new
+@students = Students.new.all_students
 
 def print_menu
   loop do
