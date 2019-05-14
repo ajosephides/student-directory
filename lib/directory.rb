@@ -5,9 +5,7 @@ require_relative './students.rb'
 
 @user = User.new
 @menu = Menu.new
-@students = Students.new.all_students
-#@students_exp = Students.new.all_students
-
+@students = Students.new
 
 def print_menu
   loop do
@@ -46,15 +44,14 @@ def add_students(name)
     puts "Please enter their cohort months"
     cohort = @user.add_cohort
     add_student(name, cohort)
-    puts "Now we have #{@students.count} students\n"
+    puts "Now we have #{@students.all_students.count} students\n"
     puts "Please enter the next student's name"
     name = @user.add_name
   end
 end
 
 def add_student(name, cohort)
-  #@students<< Student.new(name, cohort)
-  Student.new(name, cohort).add_student(@students)
+  Student.new(name, cohort).add_student(@students.all_students)
 end
 
 def filter_choice
@@ -68,16 +65,17 @@ def student_filter(filter_choice)
     puts "No filter applied"
   when "1"
     puts "Please enter first letter of students name that you wish to print"
-    letter_filter = @user.filter_detail
-    return @students.select { |student| student.name[0].upcase == letter_filter.upcase}
+    @students.first_letter_filter(@user.filter_detail)
   when "2"
     puts "Please enter maximum number of characters for a name"
-    number_filter = @user.filter_detail
-    return @students.select { |student| student.name.length <= number_filter.to_i}
+    #number_filter = @user.filter_detail
+    #return @students.all_students.select { |student| student.name.length <= number_filter.to_i}
+    @students.character_filter(@user.filter_detail)
   when "3"
     puts "Please choose from the following cohorts #{group_options.join(", ")}"
-    cohort_filter = @user.filter_detail
-    return @students.select { |student| student.cohort.upcase == cohort_filter.upcase}
+    #cohort_filter = @user.filter_detail
+    #return @students.all_students.select { |student| student.cohort.upcase == cohort_filter.upcase}
+    @students.cohort_filter(@user.filter_detail)
   when "9"
     exit
   end
@@ -85,7 +83,7 @@ end
 
 def group_options
 options = []
-@students.each { |student| options << student.cohort.to_s.capitalize}
+@students.all_students.each { |student| options << student.cohort.to_s.capitalize}
 return options.uniq
 end
 
@@ -95,7 +93,7 @@ def print_header
 end
 
 def print
-  @students.each_with_index { 
+  @students.all_students.each_with_index { 
     |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
   }
 end
@@ -107,7 +105,7 @@ def print_filtered(filtered_students)
 end
 
 def print_footer
-  puts "Overall, we have #{@students.count} great student#{if @students.count > 1 then "s" end}"
+  puts "Overall, we have #{@students.all_students.count} great student#{if @students.all_students.count > 1 then "s" end}"
 end
 
 def show_students
@@ -118,7 +116,7 @@ end
 
 def save_students
   file = File.open("students.csv", "w")
-  @students.each do | student |
+  @students.all_students.each do | student |
     student_data = [student.name, student.cohort]
     csv_line = student_data.join(",")
     file.puts csv_line
@@ -131,7 +129,7 @@ def try_load_students
   return if filename.nil?
   if File.exists?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
+    puts "Loaded #{@students.all_students.count} from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist"
     exit
