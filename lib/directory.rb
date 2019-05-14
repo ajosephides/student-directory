@@ -72,18 +72,18 @@ def student_filter(filter_choice)
     puts "Please enter maximum number of characters for a name"
     @students.character_filter(@user.filter_detail)
   when "3"
-    puts "Please choose from the following cohorts #{group_options.join(", ")}"
+    puts "Please choose from the following cohorts #{@students.cohorts.join(", ")}"
     @students.cohort_filter(@user.filter_detail)
   when "9"
     exit
   end
 end
 
-def group_options
-options = []
-@students.all_students.each { |student| options << student.cohort.to_s.capitalize}
-return options.uniq
-end
+#def group_options
+#options = []
+#@students.all_students.each { |student| options << student.cohort.to_s.capitalize}
+#return options.uniq
+#end
 
 def save_students
   file = File.open("students.csv", "w")

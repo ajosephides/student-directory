@@ -1,6 +1,5 @@
 class Output
   
-  
   def print_header
     puts "The students of Villains Academy"
     puts "-------------"

@@ -18,4 +18,10 @@ def cohort_filter(cohort)
   return self.all_students.select { |student| student.cohort.upcase == cohort.upcase}
 end
 
+def cohorts
+  options = []
+  self.all_students.each { |student| options << student.cohort.to_s.capitalize}
+  return options.uniq
+end
+
 end
