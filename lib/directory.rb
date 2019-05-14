@@ -1,4 +1,6 @@
+require_relative './student.rb'
 @students = []
+
 def print_menu
   loop do
   puts "\n--------------------------------"
@@ -59,7 +61,7 @@ def add_students(name)
 end
 
 def add_student(name, cohort)
-  @students << {name: name, cohort: cohort.to_sym}
+  @students<< Student.new(name, cohort)
 end
 
 def filter_choice
@@ -79,15 +81,15 @@ def student_filter(filter_choice)
   when "1"
     puts "Please enter first letter of students name that you wish to print"
     letter_filter = STDIN.gets.chomp
-    return @students.select { |student| student[:name][0].upcase == letter_filter.upcase}
+    return @students.select { |student| student.name[0].upcase == letter_filter.upcase}
   when "2"
     puts "Please enter maximum number of characters for a name"
     number_filter = STDIN.gets.chomp
-    return @students.select { |student| student[:name].length <= number_filter.to_i}
+    return @students.select { |student| student.name.length <= number_filter.to_i}
   when "3"
     puts "Please choose from the following cohorts #{group_options.join(", ")}"
     cohort_filter = STDIN.gets.chomp
-    return @students.select { |student| student[:cohort].to_s.upcase == cohort_filter.upcase}
+    return @students.select { |student| student.cohort.upcase == cohort_filter.upcase}
   when "9"
     exit
   end
@@ -95,7 +97,7 @@ end
 
 def group_options
 options = []
-@students.each { |student| options << student[:cohort].to_s.capitalize}
+@students.each { |student| options << student.cohort.to_s.capitalize}
 return options.uniq
 end
 
@@ -106,13 +108,13 @@ end
 
 def print
   @students.each_with_index { 
-    |student, index | puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
   }
 end
 
 def print_filtered(filtered_students)
   filtered_students.each_with_index { 
-    |student, index | puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
   }
 end
 
@@ -129,7 +131,7 @@ end
 def save_students
   file = File.open("students.csv", "w")
   @students.each do | student |
-    student_data = [student[:name], student[:cohort]]
+    student_data = [student.name, student.cohort]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
