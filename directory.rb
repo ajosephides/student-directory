@@ -1,12 +1,15 @@
 @students = []
 def print_menu
   loop do
-  puts "1. Input the students"
-  puts "2. Filter the students"
-  puts "3. Show the students"
-  puts "4. Save the students"
+  puts "\n--------------------------------"
+  puts "1. Input the students manually"
+  puts "2. Load students from a file"
+  puts "3. Filter the students"
+  puts "4. Show the students"
+  puts "5. Save the students"
   puts "9. Exit"
-  process_choice(gets.chomp)
+  puts "--------------------------------\n"
+  process_choice(STDIN.gets.chomp)
   end
 end
 
@@ -15,10 +18,12 @@ def process_choice(selection)
   when "1"
     input_students
   when "2"
-    print_filtered(student_filter(filter_choice))
+    load_students
   when "3"
-    show_students
+    print_filtered(student_filter(filter_choice))
   when "4"
+    show_students
+  when "5"
     save_students
   when "9"
     exit
@@ -34,7 +39,7 @@ def input_students
 end
 
 def user_input
-  user_input = gets.chomp
+  user_input = STDIN.gets.chomp
   if user_input.empty?
     return "Unknown"
   else
@@ -64,7 +69,7 @@ puts "1. Filter by first letter of name"
 puts "2. Filter by number of characters in name"
 puts "3. Filter by cohort"
 puts "9. Exit"
-return gets.chomp
+return STDIN.gets.chomp
 end
 
 def student_filter(filter_choice)
@@ -73,15 +78,15 @@ def student_filter(filter_choice)
     puts "No filter applied"
   when "1"
     puts "Please enter first letter of students name that you wish to print"
-    letter_filter = gets.chomp
+    letter_filter = STDIN.gets.chomp
     return @students.select { |student| student[:name][0].upcase == letter_filter.upcase}
   when "2"
     puts "Please enter maximum number of characters for a name"
-    number_filter = gets.chomp
+    number_filter = STDIN.gets.chomp
     return @students.select { |student| student[:name].length <= number_filter.to_i}
   when "3"
     puts "Please choose from the following cohorts #{group_options.join(", ")}"
-    cohort_filter = gets.chomp
+    cohort_filter = STDIN.gets.chomp
     return @students.select { |student| student[:cohort].to_s.upcase == cohort_filter.upcase}
   when "9"
     exit
@@ -131,6 +136,26 @@ def save_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
+    exit
+  end
+end
 
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
+  file.readlines.each do | line |
+    name, cohort = line.chomp.split(',')
+    add_student(name, cohort)
+  end
+  file.close
+end
 
+try_load_students
 print_menu
