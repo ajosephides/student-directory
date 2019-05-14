@@ -13,6 +13,14 @@ class User
     return input
   end
 
+  def filter_selection
+    return input
+  end
+
+  def filter_detail
+    return input
+  end
+
   def add_name
     return input
   end

@@ -40,26 +40,17 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish hit return twice when entering a name"
- return add_students(user_input)
-end
-
-def user_input
-  user_input = STDIN.gets.chomp
-  if user_input.empty?
-    return "Unknown"
-  else
-    return user_input
-  end
+ return add_students(@user.add_name)
 end
 
 def add_students(name)
   while name != "Unknown" do
     puts "Please enter their cohort months"
-    cohort = user_input
+    cohort = @user.add_cohort
     add_student(name, cohort)
     puts "Now we have #{@students.count} students\n"
     puts "Please enter the next student's name"
-    name = user_input
+    name = @user.add_name
   end
 end
 
@@ -74,7 +65,7 @@ puts "1. Filter by first letter of name"
 puts "2. Filter by number of characters in name"
 puts "3. Filter by cohort"
 puts "9. Exit"
-return STDIN.gets.chomp
+return @user.filter_selection
 end
 
 def student_filter(filter_choice)
@@ -83,15 +74,15 @@ def student_filter(filter_choice)
     puts "No filter applied"
   when "1"
     puts "Please enter first letter of students name that you wish to print"
-    letter_filter = STDIN.gets.chomp
+    letter_filter = @user.filter_detail
     return @students.select { |student| student.name[0].upcase == letter_filter.upcase}
   when "2"
     puts "Please enter maximum number of characters for a name"
-    number_filter = STDIN.gets.chomp
+    number_filter = @user.filter_detail
     return @students.select { |student| student.name.length <= number_filter.to_i}
   when "3"
     puts "Please choose from the following cohorts #{group_options.join(", ")}"
-    cohort_filter = STDIN.gets.chomp
+    cohort_filter = @user.filter_detail
     return @students.select { |student| student.cohort.upcase == cohort_filter.upcase}
   when "9"
     exit
