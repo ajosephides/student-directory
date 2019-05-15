@@ -12,7 +12,7 @@ class Output
   end
   
   def print_footer(students)
-    puts "Overall, we have #{students.all_students.count} great student#{if students.all_students.count > 1 then "s" end}"
+    puts "Overall, we have #{students.number} great student#{if students.number > 1 then "s" end}"
   end
   
   def show_students(students)
@@ -24,6 +24,11 @@ class Output
   def input_students
     puts "Please enter the names of the students"
     puts "To finish hit return twice when entering a name"
+  end
+
+  def success_student_added(students)
+    puts "Now we have #{students.number} students\n"
+    puts "Please enter the next student's name"
   end
 
 

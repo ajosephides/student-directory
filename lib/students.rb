@@ -14,7 +14,7 @@ end
 def first_letter_filter(letter)
   filtered_students = Students.new
   self.all_students.each { |student| if student.name[0].upcase == letter.upcase 
-    then filtered_students.add_student(student.name, student.cohort) end 
+    then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
   }
   return filtered_students
 end
@@ -22,7 +22,7 @@ end
 def character_filter(number)
   filtered_students = Students.new
   self.all_students.each { |student| if student.name.length <= number.to_i
-    then filtered_students.add_student(student.name, student.cohort) end 
+    then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
   }
   return filtered_students
 end
@@ -30,7 +30,7 @@ end
 def cohort_filter(cohort)
   filtered_students = Students.new
   self.all_students.each { |student| if student.cohort.upcase == cohort.upcase
-    then filtered_students.add_student(student.name, student.cohort) end 
+    then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
   }
   return filtered_students
 end
@@ -52,21 +52,25 @@ def save_students
 end
 
 def add_students
-  output = Output.new.input_students
+  output = Output.new
   input = User.new
+  output.input_students
   name = input.add_name
   while name != "Unknown" do
     puts "Please enter their cohort months"
     cohort = input.add_cohort
     add_student(Student.new(name, cohort))
-    puts "Now we have #{self.all_students.count} students\n"
-    puts "Please enter the next student's name"
+    output.success_student_added(self)
     name = input.add_name
   end
 end
 
 def add_student(student)
   self.all_students << student
+end
+
+def number
+  self.all_students.count
 end
 
 end
