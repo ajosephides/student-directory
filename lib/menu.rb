@@ -1,3 +1,5 @@
+
+
 class Menu
 
 def print_main
@@ -11,7 +13,6 @@ def print_main
   puts "--------------------------------\n"
 end
 
-
 def print_filter
   puts "Please select an option to filter by"
   puts "0. No filter"
@@ -21,7 +22,24 @@ def print_filter
   puts "9. Exit"
 end
 
-
+#def process_main(selection)
+  #case selection
+  #when "1"
+    #input_students
+  #when "2"
+    #load_students
+  #when "3"
+    #Output.new.print_students(student_filter(filter_choice))
+  #when "4"
+    #Output.new.show_students(@students.all_students)
+  #when "5"
+    #@students.save_students
+  #when "9"
+    #exit
+  #else
+    #puts "Please enter one of the choices again"
+  #end
+#end
 
 
 

@@ -12,13 +12,15 @@ def print_menu
   loop do
   @menu.print_main
   process_choice(@user.menu_selection)
+  #@menu.process_main(@user, @students)
   end
 end
 
 def process_choice(selection)
   case selection
   when "1"
-    input_students
+    #input_students
+    @students.add_students
   when "2"
     load_students
   when "3"
@@ -34,26 +36,26 @@ def process_choice(selection)
   end
 end
 
-def input_students
-  puts "Please enter the names of the students"
-  puts "To finish hit return twice when entering a name"
- return add_students(@user.add_name)
-end
-
-def add_students(name)
-  while name != "Unknown" do
-    puts "Please enter their cohort months"
-    cohort = @user.add_cohort
-    add_student(name, cohort)
-    puts "Now we have #{@students.all_students.count} students\n"
-    puts "Please enter the next student's name"
-    name = @user.add_name
-  end
-end
-
-def add_student(name, cohort)
-  Student.new(name, cohort).add_student(@students.all_students)
-end
+#def input_students
+  #puts "Please enter the names of the students"
+  #puts "To finish hit return twice when entering a name"
+ #return add_students(@user.add_name)
+#end
+#
+#def add_students(name)
+  #while name != "Unknown" do
+    #puts "Please enter their cohort months"
+    #cohort = @user.add_cohort
+    #add_student(name, cohort)
+    #puts "Now we have #{@students.all_students.count} students\n"
+    #puts "Please enter the next student's name"
+    #name = @user.add_name
+  #end
+#end
+#
+#def add_student(name, cohort)
+  #Student.new(name, cohort).add_student(@students.all_students)
+#end
 
 def filter_choice
 @menu.print_filter
@@ -94,7 +96,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do | line |
     name, cohort = line.chomp.split(',')
-    add_student(name, cohort)
+    @students.add_student(name, cohort)
   end
   file.close
 end

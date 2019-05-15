@@ -21,4 +21,10 @@ class Output
     print_footer(students)
   end
 
+  def input_students
+    puts "Please enter the names of the students"
+    puts "To finish hit return twice when entering a name"
+  end
+
+
 end
