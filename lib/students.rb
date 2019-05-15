@@ -12,15 +12,27 @@ def initialize
 end
 
 def first_letter_filter(letter)
-  return self.all_students.select { |student| student.name[0].upcase == letter.upcase}
+  filtered_students = Students.new
+  self.all_students.each { |student| if student.name[0].upcase == letter.upcase 
+    then filtered_students.add_student(student.name, student.cohort) end 
+  }
+  return filtered_students
 end
 
 def character_filter(number)
-  return self.all_students.select { |student| student.name.length <= number.to_i}
+  filtered_students = Students.new
+  self.all_students.each { |student| if student.name.length <= number.to_i
+    then filtered_students.add_student(student.name, student.cohort) end 
+  }
+  return filtered_students
 end
 
 def cohort_filter(cohort)
-  return self.all_students.select { |student| student.cohort.upcase == cohort.upcase}
+  filtered_students = Students.new
+  self.all_students.each { |student| if student.cohort.upcase == cohort.upcase
+    then filtered_students.add_student(student.name, student.cohort) end 
+  }
+  return filtered_students
 end
 
 def cohorts

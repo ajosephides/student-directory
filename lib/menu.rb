@@ -9,7 +9,7 @@ def print_main
   puts "1. Input the students manually"
   puts "2. Load students from a file"
   puts "3. Filter the students"
-  puts "4. Show the students"
+  puts "4. Show all the students"
   puts "5. Save the students"
   puts "9. Exit"
   puts "--------------------------------\n"
@@ -36,7 +36,7 @@ def process_main(students)
     self.print_filter
     Output.new.print_students(student_filter(students))
   when "4"
-    Output.new.show_students(students.all_students)
+    Output.new.show_students(students)
   when "5"
     students.save_students
   when "9"

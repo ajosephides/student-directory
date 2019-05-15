@@ -6,13 +6,13 @@ class Output
   end
 
   def print_students(students)
-    students.each_with_index { 
+    students.all_students.each_with_index { 
       |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
     }
   end
   
   def print_footer(students)
-    puts "Overall, we have #{students.count} great student#{if students.count > 1 then "s" end}"
+    puts "Overall, we have #{students.all_students.count} great student#{if students.all_students.count > 1 then "s" end}"
   end
   
   def show_students(students)
