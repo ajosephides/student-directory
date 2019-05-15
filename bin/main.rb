@@ -27,7 +27,7 @@ def process_choice(selection)
     #show_students
     Output.new.show_students(@students.all_students)
   when "5"
-    save_students
+    @students.save_students
   when "9"
     exit
   else
@@ -79,15 +79,15 @@ def student_filter(filter_choice)
   end
 end
 
-def save_students
-  file = File.open("students.csv", "w")
-  @students.all_students.each do | student |
-    student_data = [student.name, student.cohort]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-  end
-  file.close
-end
+#def save_students
+  #file = File.open("students.csv", "w")
+  #@students.all_students.each do | student |
+    #student_data = [student.name, student.cohort]
+    #csv_line = student_data.join(",")
+    #file.puts csv_line
+  #end
+  #file.close
+#end
 
 def try_load_students
   filename = ARGV.first
