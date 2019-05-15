@@ -1,3 +1,5 @@
+require_relative './student.rb'
+
 class Input
 
   def try_load_students(students)
@@ -16,7 +18,7 @@ class Input
     file = File.open(filename, "r")
     file.readlines.each do | line |
       name, cohort = line.chomp.split(',')
-      students.add_student(name, cohort)
+      students.add_student(Student.new(name, cohort))
     end
     file.close
   end

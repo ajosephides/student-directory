@@ -58,18 +58,15 @@ def add_students
   while name != "Unknown" do
     puts "Please enter their cohort months"
     cohort = input.add_cohort
-    add_student(name, cohort)
+    add_student(Student.new(name, cohort))
     puts "Now we have #{self.all_students.count} students\n"
     puts "Please enter the next student's name"
     name = input.add_name
   end
 end
 
-def add_student(name, cohort)
-  Student.new(name, cohort).add_student(self.all_students)
+def add_student(student)
+  self.all_students << student
 end
-
-
-
 
 end
