@@ -30,14 +30,16 @@ class Menu
     when "1"
       students.add_students
     when "2"
-      Input.new.load_students(students)
+      Output.new.load_file
+      Input.new.load_students(students, user.load_file)
     when "3"
       self.print_filter
       Output.new.print_students(student_filter(students))
     when "4"
       Output.new.show_students(students)
     when "5"
-      students.save_students
+      Output.new.save_file
+      students.save_students(user.save_file)
     when "9"
       exit
     else

@@ -31,4 +31,12 @@ class Output
     puts "Please enter the next student's name"
   end
 
+  def load_file
+    puts "What file would you like to load"
+  end
+
+  def save_file
+    puts "What would you like to save the file as"
+  end
+
 end

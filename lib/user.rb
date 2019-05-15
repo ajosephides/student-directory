@@ -1,5 +1,5 @@
 class User
-  
+
   def input
     user_input = STDIN.gets.chomp
     if user_input.empty?
@@ -26,6 +26,14 @@ class User
   end
 
   def add_cohort
+    return input
+  end
+
+  def load_file
+    return input
+  end
+
+  def save_file
     return input
   end
 

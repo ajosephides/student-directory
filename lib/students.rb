@@ -40,8 +40,8 @@ class Students
     return options.uniq
   end
   
-  def save_students
-    file = File.open("students.csv", "w")
+  def save_students(filename)
+    file = File.open(filename, "w")
     self.all_students.each do | student |
       student_data = [student.name, student.cohort]
       csv_line = student_data.join(",")
