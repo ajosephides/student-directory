@@ -24,7 +24,8 @@ def print_filter
   puts "9. Exit"
 end
 
-def process_main(user, students)
+def process_main(students)
+  user = User.new
   selection = user.menu_selection
   case selection
   when "1"
