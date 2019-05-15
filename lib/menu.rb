@@ -1,3 +1,5 @@
+require_relative './input.rb'
+require_relative './output.rb'
 
 
 class Menu
@@ -22,25 +24,46 @@ def print_filter
   puts "9. Exit"
 end
 
-#def process_main(selection)
-  #case selection
-  #when "1"
-    #input_students
-  #when "2"
-    #load_students
-  #when "3"
-    #Output.new.print_students(student_filter(filter_choice))
-  #when "4"
-    #Output.new.show_students(@students.all_students)
-  #when "5"
-    #@students.save_students
-  #when "9"
-    #exit
-  #else
-    #puts "Please enter one of the choices again"
-  #end
-#end
+def process_main(user, students)
+  selection = user.menu_selection
+  case selection
+  when "1"
+    students.add_students
+  when "2"
+    Input.new.load_students(students)
+  when "3"
+    self.print_filter
+    Output.new.print_students(student_filter(students))
+  when "4"
+    Output.new.show_students(students.all_students)
+  when "5"
+    students.save_students
+  when "9"
+    exit
+  else
+    puts "Please enter one of the choices again"
+  end
+end
 
+def student_filter(students)
+  user = User.new
+  filter_choice = user.filter_selection
+  case filter_choice
+  when "0"
+    puts "No filter applied"
+  when "1"
+    puts "Please enter first letter of students name that you wish to print"
+    students.first_letter_filter(user.filter_detail)
+  when "2"
+    puts "Please enter maximum number of characters for a name"
+    students.character_filter(user.filter_detail)
+  when "3"
+    puts "Please choose from the following cohorts #{students.cohorts.join(", ")}"
+    students.cohort_filter(user.filter_detail)
+  when "9"
+    exit
+  end
+end
 
 
 end
