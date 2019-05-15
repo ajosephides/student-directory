@@ -4,10 +4,12 @@ class Input
 
   def try_load_students(students)
     filename = ARGV.first
-    return if filename.nil?
-    if File.exists?(filename)
+    if filename.nil?
+      self.load_students(students, 'students.csv')
+      puts "Loaded #{students.number} from students.csv"
+    elsif File.exists?(filename)
       self.load_students(students, filename)
-      puts "Loaded #{students.all_students.count} from #{filename}"
+      puts "Loaded #{students.number} from #{filename}"
     else
       puts "Sorry, #{filename} doesn't exist"
       exit
