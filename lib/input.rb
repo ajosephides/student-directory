@@ -23,5 +23,4 @@ class Input
     file.close
   end
 
-
 end

@@ -31,5 +31,4 @@ class Output
     puts "Please enter the next student's name"
   end
 
-
 end

@@ -1,7 +1,5 @@
-require_relative '../lib/student.rb'
 require_relative '../lib/menu.rb'
 require_relative '../lib/students.rb'
-require_relative '../lib/output.rb'
 require_relative '../lib/input.rb'
 
 menu = Menu.new
