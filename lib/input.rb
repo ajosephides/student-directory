@@ -1,3 +1,4 @@
+require 'csv'
 require_relative './student.rb'
 
 class Input
@@ -17,12 +18,11 @@ class Input
   end
   
   def load_students(students, filename = "students.csv")
-    file = File.open(filename, "r")
-    file.readlines.each do | line |
-      name, cohort = line.chomp.split(',')
+    CSV.foreach(filename) do |row|
+      name, cohort = row
       students.add_student(Student.new(name, cohort))
     end
-    file.close
+    Output.new.success_load
   end
 
 end

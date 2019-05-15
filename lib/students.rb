@@ -2,6 +2,7 @@ require_relative './student.rb'
 require_relative './user.rb'
 require_relative './menu.rb'
 require_relative './output.rb'
+require 'csv'
 
 class Students
   attr_accessor :all_students

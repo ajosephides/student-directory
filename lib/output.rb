@@ -39,4 +39,12 @@ class Output
     puts "What would you like to save the file as"
   end
 
+  def success_load
+    puts "Succesfully loaded file"
+  end
+
+  def success_save
+    puts "Succesfully saved file"
+  end
+  
 end
