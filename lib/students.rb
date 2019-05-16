@@ -13,6 +13,7 @@ class Students
   
   def first_letter_filter(letter)
     filtered_students = Students.new
+    puts filtered_students.object_id
     self.all_students.each { |student| if student.name[0].upcase == letter.upcase 
       then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
     }
@@ -42,11 +43,11 @@ class Students
   end
   
   def save_students(filename)
-    file = File.open(filename, "w")
-    self.all_students.each do | student |
-      student_data = [student.name, student.cohort]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+    CSV.open(filename, "wb") do |row|
+      self.all_students.each do | student |
+        student_data = [student.name, student.cohort]
+        row << student_data
+      end
     end
     file.close
   end
