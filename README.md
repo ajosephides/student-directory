@@ -14,7 +14,7 @@ Functionality includes:
   * number of characters in name
   * by cohort
   
-  The base functionality of the exercise was extended to try and understand a different programme design - using classes and introduced some tests - all beyond scope of what was originally expected.
+The base functionality of the exercise was extended to try and understand a different programme design - using classes and introduced some tests - all beyond scope of what was originally expected.
 
 ## How to use ##
 
