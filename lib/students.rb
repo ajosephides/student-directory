@@ -6,52 +6,55 @@ require 'csv'
 
 class Students
   attr_accessor :all_students
-  
+
   def initialize
     @all_students = []
   end
-  
+
   def first_letter_filter(letter)
     filtered_students = Students.new
     puts filtered_students.object_id
-    self.all_students.each { |student| if student.name[0].upcase == letter.upcase 
-      then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
+    self.all_students.each { |student|
+      if student.name[0].upcase == letter.upcase
+      then filtered_students.add_student(Student.new(student.name, student.cohort)) end
     }
     return filtered_students
   end
 
   def character_filter(number)
     filtered_students = Students.new
-    self.all_students.each { |student| if student.name.length <= number.to_i
-      then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
+    self.all_students.each { |student|
+      if student.name.length <= number.to_i
+      then filtered_students.add_student(Student.new(student.name, student.cohort)) end
     }
     return filtered_students
   end
-  
+
   def cohort_filter(cohort)
     filtered_students = Students.new
-    self.all_students.each { |student| if student.cohort.upcase == cohort.upcase
-      then filtered_students.add_student(Student.new(student.name, student.cohort)) end 
+    self.all_students.each { |student|
+      if student.cohort.upcase == cohort.upcase
+      then filtered_students.add_student(Student.new(student.name, student.cohort)) end
     }
     return filtered_students
   end
-  
+
   def cohorts
     options = []
-    self.all_students.each { |student| options << student.cohort.to_s.capitalize}
+    self.all_students.each { |student| options << student.cohort.to_s.capitalize }
     return options.uniq
   end
-  
+
   def save_students(filename)
     CSV.open(filename, "wb") do |row|
-      self.all_students.each do | student |
+      self.all_students.each do |student|
         student_data = [student.name, student.cohort]
         row << student_data
       end
     end
     file.close
   end
-  
+
   def add_students
     output = Output.new
     input = User.new
@@ -69,9 +72,8 @@ class Students
   def add_student(student)
     self.all_students << student
   end
-  
+
   def number
     self.all_students.count
   end
-
 end

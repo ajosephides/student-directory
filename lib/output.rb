@@ -1,20 +1,19 @@
 class Output
-  
   def print_header
     puts "The students of Villains Academy"
     puts "-------------"
   end
 
   def print_students(students)
-    students.all_students.each_with_index { 
-      |student, index | puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
+    students.all_students.each_with_index { |student, index|
+      puts "#{index + 1}. #{student.name} (#{student.cohort} cohort)"
     }
   end
-  
+
   def print_footer(students)
     puts "Overall, we have #{students.number} great student#{if students.number > 1 then "s" end}"
   end
-  
+
   def show_students(students)
     print_header
     print_students(students)
@@ -46,5 +45,4 @@ class Output
   def success_save
     puts "Succesfully saved file"
   end
-  
 end

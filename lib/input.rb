@@ -2,7 +2,6 @@ require 'csv'
 require_relative './student.rb'
 
 class Input
-
   def try_load_students(students)
     filename = ARGV.first
     if filename.nil?
@@ -16,7 +15,7 @@ class Input
       exit
     end
   end
-  
+
   def load_students(students, filename = "students.csv")
     CSV.foreach(filename) do |row|
       name, cohort = row
@@ -24,5 +23,4 @@ class Input
     end
     Output.new.success_load
   end
-
 end

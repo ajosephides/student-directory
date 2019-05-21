@@ -2,7 +2,6 @@ require_relative './input.rb'
 require_relative './output.rb'
 
 class Menu
-  
   def print_main
     puts "\n--------------------------------"
     puts "1. Input the students manually"
@@ -13,7 +12,7 @@ class Menu
     puts "9. Exit"
     puts "--------------------------------\n"
   end
-  
+
   def print_filter
     puts "Please select an option to filter by"
     puts "0. No filter"
@@ -22,7 +21,7 @@ class Menu
     puts "3. Filter by cohort"
     puts "9. Exit"
   end
-  
+
   def process_main(students)
     user = User.new
     selection = user.menu_selection
@@ -46,7 +45,7 @@ class Menu
       puts "Please enter one of the choices again"
     end
   end
-  
+
   def student_filter(students)
     user = User.new
     filter_choice = user.filter_selection
@@ -66,5 +65,4 @@ class Menu
       exit
     end
   end
-
 end

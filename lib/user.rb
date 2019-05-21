@@ -1,5 +1,4 @@
 class User
-
   def input
     user_input = STDIN.gets.chomp
     if user_input.empty?
@@ -36,5 +35,4 @@ class User
   def save_file
     return input
   end
-
 end
