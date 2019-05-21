@@ -1,7 +1,7 @@
 class Output
   def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
+    puts 'The students of Villains Academy'
+    puts '-------------'
   end
 
   def print_students(students)
@@ -21,8 +21,8 @@ class Output
   end
 
   def input_students
-    puts "Please enter the names of the students"
-    puts "To finish hit return twice when entering a name"
+    puts 'Please enter the names of the students'
+    puts 'To finish hit return twice when entering a name'
   end
 
   def success_student_added(students)
@@ -31,18 +31,18 @@ class Output
   end
 
   def load_file
-    puts "What file would you like to load"
+    puts 'What file would you like to load'
   end
 
   def save_file
-    puts "What would you like to save the file as"
+    puts 'What would you like to save the file as'
   end
 
   def success_load
-    puts "Succesfully loaded file"
+    puts 'Succesfully loaded file'
   end
 
   def success_save
-    puts "Succesfully saved file"
+    puts 'Succesfully saved file'
   end
 end

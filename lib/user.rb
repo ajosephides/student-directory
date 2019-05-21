@@ -2,37 +2,37 @@ class User
   def input
     user_input = STDIN.gets.chomp
     if user_input.empty?
-      return "Unknown"
+      return 'Unknown'
     else
       return user_input
     end
   end
 
   def menu_selection
-    return input
+    input
   end
 
   def filter_selection
-    return input
+    input
   end
 
   def filter_detail
-    return input
+    input
   end
 
   def add_name
-    return input
+    input
   end
 
   def add_cohort
-    return input
+    input
   end
 
   def load_file
-    return input
+    input
   end
 
   def save_file
-    return input
+    input
   end
 end
