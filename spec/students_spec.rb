@@ -9,8 +9,8 @@ describe 'Students' do
 
   let(:adding_students) {
     students = Students.new
-    student1 = Student.new("name", "cohort")
-    student2 = Student.new("name", "cohort")
+    student1 = Student.new('name', 'cohort')
+    student2 = Student.new('name', 'cohort')
     students.add_student(student1)
     students.add_student(student2)
     students.number
